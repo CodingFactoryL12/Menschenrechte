@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt - Menschenrechte</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">🌍 Menschenrechte</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rights.html">Rechte</a></li>
+                    <li><a href="challenges.html">Herausforderungen</a></li>
+                    <li><a href="games.html" style="color: #667eea; font-weight: bold;">🎮 Spiele</a></li>
+                    <li><a href="projects.html" style="color: #667eea; font-weight: bold;">📌 Projekte</a></li>
+                    <li><a href="team.html" style="color: #667eea; font-weight: bold;">👥 Team</a></li>
+                    <li><a href="action.html">Handeln</a></li>
+                    <li><a href="about.html">Über mich</a></li>
+                    <li><a href="contact.html" style="color: #667eea; font-weight: bold;">✉️ Kontakt</a></li>
+                    <li><a href="sources.html">Quellen</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Kontakt</h1>
+                <p>Hast du Fragen, Feedback oder möchtest mit uns zusammenarbeiten? Wir freuen uns, von dir zu hören!</p>
+            </div>
+        </section>
+
+        <section class="contact-form-section">
+            <div class="container">
+                <h2>Nachricht senden</h2>
+                <form class="contact-form" id="contactForm" onsubmit="handleContactForm(event)">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Betreff *</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Nachricht *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Nachricht senden</button>
+                </form>
+
+                <div class="contact-info">
+                    <div class="contact-method">
+                        <div class="contact-method-icon">✉️</div>
+                        <h3>Email</h3>
+                        <p>menschenrechte@projekt.de</p>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon">🌐</div>
+                        <h3>Website</h3>
+                        <p>www.menschenrechte-projekt.de</p>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon">📱</div>
+                        <h3>Social Media</h3>
+                        <p>Folge uns auf den sozialen Medien</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Zusammenarbeit</h2>
+                <div class="cta-grid">
+                    <div class="cta-card">
+                        <div class="icon">🤝</div>
+                        <h3>Projektpartner</h3>
+                        <p>Interessiert an einer Zusammenarbeit? Lass es uns wissen!</p>
+                    </div>
+
+                    <div class="cta-card">
+                        <div class="icon">💡</div>
+                        <h3>Verbesserungsvorschläge</h3>
+                        <p>Dein Feedback hilft uns, besser zu werden.</p>
+                    </div>
+
+                    <div class="cta-card">
+                        <div class="icon">🎓</div>
+                        <h3>Bildungskooperationen</h3>
+                        <p>Schulen und Institutionen können uns kontaktieren.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="rights.html">Menschenrechte</a></li>
+                        <li><a href="challenges.html">Herausforderungen</a></li>
+                        <li><a href="games.html">Spiele</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Mehr</h3>
+                    <ul>
+                        <li><a href="projects.html">Projekte</a></li>
+                        <li><a href="team.html">Unser Team</a></li>
+                        <li><a href="action.html">Handeln</a></li>
+                        <li><a href="about.html">Über mich</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Ressourcen</h3>
+                    <ul>
+                        <li><a href="sources.html">Quellen</a></li>
+                        <li><a href="mailto:niklas@menschenrechte.de">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Menschenrechte Schulprojekt. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function handleContactForm(event) {
+            event.preventDefault();
+            const form = document.getElementById('contactForm');
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Erstelle mailto-Link mit allen Formularinformationen
+            const mailtoLink = `mailto:niklas@menschenrechte.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\n\n${message}`)}`;
+            
+            // Öffne E-Mail-Client
+            window.location.href = mailtoLink;
+            
+            // Zeige Erfolgsmeldung
+            alert('Danke für deine Nachricht! Dein E-Mail-Client wird gleich geöffnet.');
+            form.reset();
+        }
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Speichere die Nachricht in LocalStorage (für Admin-Bereich)
+            const contactMessages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+            contactMessages.push({
+                name,
+                email,
+                subject,
+                message,
+                date: new Date().toLocaleString('de-DE')
+            });
+            localStorage.setItem('contactMessages', JSON.stringify(contactMessages));
+
+            // Zeige Erfolgsbestätigung
+            alert(`Danke ${name}! Deine Nachricht wurde erhalten. Wir melden uns bald bei dir!`);
+            form.reset();
+        }
+    </script>
+</body>
+</html>

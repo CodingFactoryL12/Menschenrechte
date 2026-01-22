@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Guide | Menschenrechte</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 3rem;
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInScale 0.6s ease-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+            display: inline-block;
+        }
+
+        .card-icon:nth-child(1) { animation-delay: 0s; }
+        .card-icon:nth-child(2) { animation-delay: 0.2s; }
+        .card-icon:nth-child(3) { animation-delay: 0.4s; }
+        .card-icon:nth-child(4) { animation-delay: 0.6s; }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .features {
+            list-style: none;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .features li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: scale(1.05);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .highlight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 3px solid rgba(74, 222, 128, 0.5);
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .highlight h2 {
+            color: #4ade80;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Menschenrechte - Website</h1>
+
+        <div class="highlight">
+            <h2>✨ NEU: 3 innovative Seiten mit vollem HTML, CSS & JavaScript!</h2>
+            <p>Vollständig funktional mit Animationen, Verlinkungen und interaktiven Elementen</p>
+        </div>
+
+        <h2 class="section-title">🎮 Interaktive Spiele-Seite</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🎮</div>
+                <h3><a href="games.html" class="btn" style="display: block; text-align: center;">Zur Spiele-Seite →</a></h3>
+                <p><strong>Vollständig funktionale HTML-Seite mit:</strong></p>
+                <ul class="features">
+                    <li><strong>Quiz-Spiel</strong> - 5 Fragen mit Live-Feedback</li>
+                    <li><strong>Memory-Game</strong> - Paare finden mit Animation</li>
+                    <li><strong>Wort-Puzzle</strong> - Ergänze fehlende Wörter</li>
+                    <li>Smooth Animationen & Transitions</li>
+                    <li>Responsive Design für alle Geräte</li>
+                    <li>Fortschrittsanzeige & Punktesystem</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📌</div>
+                <h3><a href="projects.html" class="btn" style="display: block; text-align: center;">Zur Projekte-Seite →</a></h3>
+                <p><strong>Schülerprojekte mit interaktiven Kacheln:</strong></p>
+                <ul class="features">
+                    <li>8 verschiedene Schülerprojekte</li>
+                    <li>Filter nach Kategorien</li>
+                    <li>Expandierbare Details (Modal-Fenster)</li>
+                    <li>Animations-Effekte beim Hover</li>
+                    <li>Statistik-Bereich</li>
+                    <li>Vollständig mit JavaScript</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">👥</div>
+                <h3><a href="team.html" class="btn" style="display: block; text-align: center;">Zum Team-Seite →</a></h3>
+                <p><strong>Teamvorstellung mit Timeline:</strong></p>
+                <ul class="features">
+                    <li>6 Teamkarten mit Rollen</li>
+                    <li>Interaktive Skill-Tags</li>
+                    <li>Animierte Projektmeilenstein-Timeline</li>
+                    <li>Smooth Hover-Effekte</li>
+                    <li>Mission-Statement</li>
+                    <li>Voll responsive & animiert</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title">📱 Alle verfügbaren Seiten</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🏠</div>
+                <h3>Home</h3>
+                <p>Startseite mit allen Links zu den Bereichen</p>
+                <a href="index.html" class="btn">Besuchen →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⚖️</div>
+                <h3>Deine Rechte</h3>
+                <p>Übersicht der 30 Menschenrechtsartikel</p>
+                <a href="rights.html" class="btn">Besuchen →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⚠️</div>
+                <h3>Herausforderungen</h3>
+                <p>Aktuelle Menschenrechtsprobleme weltweit</p>
+                <a href="challenges.html" class="btn">Besuchen →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">✊</div>
+                <h3>Handeln</h3>
+                <p>Wie du selbst aktiv werden kannst</p>
+                <a href="action.html" class="btn">Besuchen →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">ℹ️</div>
+                <h3>Über uns</h3>
+                <p>Informationen über das Projekt</p>
+                <a href="about.html" class="btn">Besuchen →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📚</div>
+                <h3>Quellen</h3>
+                <p>Verwendete Quellen und Referenzen</p>
+                <a href="sources.html" class="btn">Besuchen →</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">🎨 Persönliche Thema-Projekte</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🌟</div>
+                <h3>Thema 3-1</h3>
+                <p>Hier bin ich Mensch – hier darf ich's sein!</p>
+                <a href="theme-3-1-neu.html" class="btn">Anschauen →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🎤</div>
+                <h3>Thema 3-2</h3>
+                <p>Klare Stimme – offenes Ohr</p>
+                <a href="theme-3-2-neu.html" class="btn">Anschauen →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">✊</div>
+                <h3>Thema 3-3</h3>
+                <p>Für ein gerechtes Miteinander</p>
+                <a href="theme-3-3-neu.html" class="btn">Anschauen →</a>
+            </div>
+        </div>
+
+        <div class="highlight" style="margin-top: 3rem;">
+            <h2>✅ Was wurde implementiert:</h2>
+            <div style="text-align: left; display: inline-block;">
+                <ul class="features" style="padding: 1rem 2rem; text-align: left;">
+                    <li style="padding-left: 2rem;">✅ Vollständige HTML-Dateien mit CSS-Styling</li>
+                    <li style="padding-left: 2rem;">✅ JavaScript für alle interaktiven Funktionen</li>
+                    <li style="padding-left: 2rem;">✅ Animationen (Fade-In, Slide, Bounce, Scale, etc.)</li>
+                    <li style="padding-left: 2rem;">✅ Responsive Design für Mobile & Desktop</li>
+                    <li style="padding-left: 2rem;">✅ Navigation mit allen Verlinkungen auf allen Seiten</li>
+                    <li style="padding-left: 2rem;">✅ Quiz-Spiel mit Feedback & Punktestand</li>
+                    <li style="padding-left: 2rem;">✅ Memory-Game mit Flipp-Animation</li>
+                    <li style="padding-left: 2rem;">✅ Wort-Puzzle mit Validierung</li>
+                    <li style="padding-left: 2rem;">✅ Modal-Fenster für Projektdetails</li>
+                    <li style="padding-left: 2rem;">✅ Filter-Funktion für Projekte</li>
+                    <li style="padding-left: 2rem;">✅ Timeline mit alternierenden Positionen</li>
+                    <li style="padding-left: 2rem;">✅ Smooth Transitions & Hover-Effekte</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>🎯 Menschenrechte Schulprojekt 2026</p>
+            <p style="font-size: 0.9rem; margin-top: 1rem;">Entwickelt mit HTML5, CSS3 & Vanilla JavaScript</p>
+        </footer>
+    </div>
+</body>
+</html>

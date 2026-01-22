@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unser Team | Menschenrechte</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin: 3rem 0;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            animation: slideInUp 0.8s ease-out 0.2s both;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .team-member {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: fadeInScale 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            border-color: rgba(102, 126, 234, 0.8);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .team-member-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-member h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-member .role {
+            color: #60a5fa;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-member .bio {
+            color: #d0d0d0;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-tag {
+            background: rgba(102, 126, 234, 0.3);
+            color: #60a5fa;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(102, 126, 234, 0.6);
+            transform: scale(1.1);
+        }
+
+        /* Timeline */
+        .timeline-section {
+            margin: 4rem 0;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .timeline-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            animation: fadeInScale 0.6s ease-out;
+        }
+
+        .timeline-item:nth-child(odd) {
+            text-align: right;
+            padding-right: 52%;
+        }
+
+        .timeline-item:nth-child(even) {
+            text-align: left;
+            padding-left: 52%;
+        }
+
+        .timeline-item-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 4px solid #1e3a8a;
+            border-radius: 50%;
+            top: 20px;
+        }
+
+        .timeline-item-content {
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-item-content {
+            margin-right: 2rem;
+        }
+
+        .timeline-item:nth-child(even) .timeline-item-content {
+            margin-left: 2rem;
+        }
+
+        .timeline-item-content:hover {
+            border-color: rgba(102, 126, 234, 0.8);
+            background: rgba(102, 126, 234, 0.2);
+            transform: scale(1.05);
+        }
+
+        .timeline-date {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .timeline-description {
+            color: #d0d0d0;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            animation: fadeInScale 0.6s ease-out;
+        }
+
+        .mission-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            text-align: center;
+            color: #999;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #a78bfa;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                text-align: left;
+                padding-left: 80px;
+                padding-right: 0;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-item-content,
+            .timeline-item:nth-child(even) .timeline-item-content {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .timeline-item-dot {
+                left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">🎯 Menschenrechte</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rights.html">Rechte</a></li>
+                    <li><a href="challenges.html">Herausforderungen</a></li>
+                    <li><a href="games.html">🎮 Spiele</a></li>
+                    <li><a href="projects.html">📌 Projekte</a></li>
+                    <li><a href="team.html" style="color: #667eea; font-weight: bold;">👥 Team</a></li>
+                    <li><a href="action.html">Handeln</a></li>
+                    <li><a href="contact.html">✉️ Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <h1>👥 Unser Team</h1>
+            <p>Engagierte Schüler, die sich leidenschaftlich für Menschenrechte einsetzen</p>
+        </div>
+
+        <!-- Team Members Grid -->
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-member-icon">👩‍💼</div>
+                <h3>Maria Schmidt</h3>
+                <div class="role">Projektleitung & Design</div>
+                <p class="bio">Maria führt das Projekt an und kümmert sich um das visuelle Design sowie die Koordination aller Arbeiten.</p>
+                <div class="skills">
+                    <span class="skill-tag">UI/UX Design</span>
+                    <span class="skill-tag">Management</span>
+                    <span class="skill-tag">Recherche</span>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="team-member-icon">👨‍💻</div>
+                <h3>Lars Müller</h3>
+                <div class="role">Entwicklung & Technik</div>
+                <p class="bio">Lars entwickelt die technische Infrastruktur und implementiert alle interaktiven Features der Website.</p>
+                <div class="skills">
+                    <span class="skill-tag">Frontend</span>
+                    <span class="skill-tag">React/Next.js</span>
+                    <span class="skill-tag">Datenvisualisierung</span>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="team-member-icon">👩‍🔬</div>
+                <h3>Sophie Wagner</h3>
+                <div class="role">Inhalte & Recherche</div>
+                <p class="bio">Sophie recherchiert umfassend zu Menschenrechtsthemen und erstellt prägnante, informative Inhalte.</p>
+                <div class="skills">
+                    <span class="skill-tag">Recherche</span>
+                    <span class="skill-tag">Texterstellung</span>
+                    <span class="skill-tag">Dokumentation</span>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="team-member-icon">👨‍🎨</div>
+                <h3>Felix Schneider</h3>
+                <div class="role">Datenanalyse & Grafiken</div>
+                <p class="bio">Felix erstellt beeindruckende Visualisierungen und Animationen, die komplexe Daten verständlich machen.</p>
+                <div class="skills">
+                    <span class="skill-tag">Datenvisualisierung</span>
+                    <span class="skill-tag">Grafik-Design</span>
+                    <span class="skill-tag">Animation</span>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="team-member-icon">🎮</div>
+                <h3>Emma Hoffmann</h3>
+                <div class="role">Spiele & Interaktion</div>
+                <p class="bio">Emma entwickelt unterhaltsame Spiele und interaktive Elemente, um das Lernen spannend zu gestalten.</p>
+                <div class="skills">
+                    <span class="skill-tag">Game Design</span>
+                    <span class="skill-tag">Interaktive UX</span>
+                    <span class="skill-tag">User Testing</span>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="team-member-icon">🎬</div>
+                <h3>Jonas Weber</h3>
+                <div class="role">Multimedia & Kommunikation</div>
+                <p class="bio">Jonas produziert Videoinhalte und kümmert sich um die Kommunikation mit der Zielgruppe.</p>
+                <div class="skills">
+                    <span class="skill-tag">Video-Bearbeitung</span>
+                    <span class="skill-tag">Audio-Production</span>
+                    <span class="skill-tag">Social Media</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="timeline-section">
+            <h2>📅 Projektmeilensteine</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-item-dot"></div>
+                    <div class="timeline-item-content">
+                        <div class="timeline-date">September 2025</div>
+                        <div class="timeline-title">Projektstart</div>
+                        <div class="timeline-description">Ideenentwicklung und umfangreiche Planung</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-item-dot"></div>
+                    <div class="timeline-item-content">
+                        <div class="timeline-date">Oktober 2025</div>
+                        <div class="timeline-title">Recherchephase</div>
+                        <div class="timeline-description">Umfangreiche Recherche zu internationalen Menschenrechten</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-item-dot"></div>
+                    <div class="timeline-item-content">
+                        <div class="timeline-date">November 2025</div>
+                        <div class="timeline-title">Entwicklung</div>
+                        <div class="timeline-description">Technische Umsetzung und Design beginnt</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-item-dot"></div>
+                    <div class="timeline-item-content">
+                        <div class="timeline-date">Dezember 2025</div>
+                        <div class="timeline-title">Beta-Launch</div>
+                        <div class="timeline-description">Erste Version der Website geht online</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-item-dot"></div>
+                    <div class="timeline-item-content">
+                        <div class="timeline-date">Januar 2026</div>
+                        <div class="timeline-title">Schülerprojekte</div>
+                        <div class="timeline-description">Integration der Mitschülerprojekte und interaktiven Spiele</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-item-dot"></div>
+                    <div class="timeline-item-content">
+                        <div class="timeline-date">Februar 2026</div>
+                        <div class="timeline-title">Finales Launch</div>
+                        <div class="timeline-description">Vollständige Website mit allen Features live</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission Section -->
+        <div class="mission-section">
+            <h2>🎯 Unsere Mission</h2>
+            <p>Wir möchten junge Menschen inspirieren und aufklären über die universelle Bedeutung von Menschenrechten. Durch kreative, interaktive und unterhaltsame Inhalte machen wir ein wichtiges Thema zugänglich und zeigen, dass jeder von uns einen Unterschied machen kann.</p>
+        </div>
+
+        <!-- Credits & Maintainer Section -->
+        <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border: 2px solid rgba(102, 126, 234, 0.3); border-radius: 15px; padding: 3rem 2rem; margin: 3rem 0; animation: fadeInScale 0.6s ease-out;">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 2rem; background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">👨‍💼 Projektmaintainer</h2>
+            
+            <div style="text-align: center; background: rgba(102, 126, 234, 0.1); border: 2px solid rgba(102, 126, 234, 0.3); border-radius: 10px; padding: 2rem; margin-bottom: 2rem;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🌟</div>
+                <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem;">Niklas Weber</h3>
+                <div style="color: #60a5fa; font-size: 1.1rem; font-weight: bold; margin-bottom: 1rem;">Hauptverantwortlicher Maintainer</div>
+                <p style="color: #d0d0d0; line-height: 1.6; max-width: 600px; margin: 0 auto;">Niklas ist der Kern und die treibende Kraft hinter diesem Schulprojekt. Er koordiniert alle Aktivitäten, kümmert sich um die technische Wartung der Website und stellt sicher, dass das Projekt seine hochgesteckten Ziele erreicht. Seine Verantwortung ist nicht zu unterschätzen.</p>
+            </div>
+
+            <h3 style="text-align: center; color: #60a5fa; font-size: 1.3rem; margin: 2rem 0;">🙏 Dankbarkeit an alle Mitwirkenden</h3>
+            <p style="text-align: center; color: #d0d0d0; line-height: 1.6; max-width: 800px; margin: 0 auto;">Dieses Projekt war nur möglich durch das Engagement und die harte Arbeit aller Teammitglieder. Maria, Lars, Sophie, Felix, Emma und Jonas haben unzählige Stunden investiert, um diese Website zum Leben zu erwecken. Ein großes Dankeschön an alle, die mit ihrer Zeit, ihren Fähigkeiten und ihrer Leidenschaft beigetragen haben.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                <div style="background: rgba(102, 126, 234, 0.1); border: 1px solid rgba(102, 126, 234, 0.3); border-radius: 10px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤝</div>
+                    <h4 style="color: #fff; margin-bottom: 0.5rem;">Zusammenarbeit</h4>
+                    <p style="color: #d0d0d0; font-size: 0.9rem;">Gegenseitige Unterstützung und konstruktives Feedback waren der Schlüssel zum Erfolg.</p>
+                </div>
+                <div style="background: rgba(102, 126, 234, 0.1); border: 1px solid rgba(102, 126, 234, 0.3); border-radius: 10px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">💡</div>
+                    <h4 style="color: #fff; margin-bottom: 0.5rem;">Innovation</h4>
+                    <p style="color: #d0d0d0; font-size: 0.9rem;">Kreative Lösungen und neue Ideen prägten die Entwicklung dieser Website.</p>
+                </div>
+                <div style="background: rgba(102, 126, 234, 0.1); border: 1px solid rgba(102, 126, 234, 0.3); border-radius: 10px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+                    <h4 style="color: #fff; margin-bottom: 0.5rem;">Zielorientierung</h4>
+                    <p style="color: #d0d0d0; font-size: 0.9rem;">Fokus auf die gemeinsamen Ziele half uns, die Hürden zu überwinden.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Menschenrechte Schulprojekt | Maintainer: <strong>Niklas Weber</strong> | <a href="sources.html">Quellen</a> | <a href="about.html">Über uns</a></p>
+    </footer>
+</body>
+</html>

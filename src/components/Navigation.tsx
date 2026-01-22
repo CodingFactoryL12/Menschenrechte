@@ -14,6 +14,9 @@ export default function Navigation() {
             <Link href="/" className="text-gray-700 hover:text-primary transition">Home</Link>
             <Link href="/rights" className="text-gray-700 hover:text-primary transition">Rechte</Link>
             <Link href="/challenges" className="text-gray-700 hover:text-primary transition">Herausforderungen</Link>
+            <Link href="/games" className="text-gray-700 hover:text-primary transition font-semibold text-purple-600">Spiele</Link>
+            <Link href="/projects" className="text-gray-700 hover:text-primary transition font-semibold text-blue-600">Projekte</Link>
+            <Link href="/team" className="text-gray-700 hover:text-primary transition font-semibold text-pink-600">Team</Link>
             <Link href="/action" className="text-gray-700 hover:text-primary transition">Handeln</Link>
           </div>
         </div>

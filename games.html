@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktive Spiele | Menschenrechte</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin: 3rem 0;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            margin-bottom: 2rem;
+            animation: slideInUp 0.8s ease-out 0.2s both;
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .game-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInScale 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(102, 126, 234, 0.8);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+        }
+
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+            display: inline-block;
+        }
+
+        .game-card:nth-child(1) .game-icon { animation-delay: 0s; }
+        .game-card:nth-child(2) .game-icon { animation-delay: 0.2s; }
+        .game-card:nth-child(3) .game-icon { animation-delay: 0.4s; }
+
+        .game-card h2 {
+            font-size: 1.8rem;
+            margin: 1rem 0;
+            color: #fff;
+        }
+
+        .game-card p {
+            color: #d0d0d0;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .btn-play:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-play:active {
+            transform: scale(0.98);
+        }
+
+        /* Game Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2d5a8c 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideInUp 0.3s ease-out;
+            border: 2px solid rgba(102, 126, 234, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-btn {
+            color: #fff;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #667eea;
+        }
+
+        /* Quiz Styles */
+        .quiz-question {
+            margin: 2rem 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .quiz-question h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #60a5fa;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #fff;
+        }
+
+        .quiz-option:hover {
+            background: rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.8);
+            transform: translateX(5px);
+        }
+
+        .quiz-option.selected {
+            background: rgba(102, 126, 234, 0.5);
+            border-color: #667eea;
+        }
+
+        .quiz-option.correct {
+            background: rgba(34, 197, 94, 0.5);
+            border-color: #22c55e;
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.5);
+            border-color: #ef4444;
+        }
+
+        .explanation {
+            background: rgba(59, 130, 246, 0.2);
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            animation: slideInLeft 0.3s ease-out;
+        }
+
+        /* Memory Game Styles */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            transition: all 0.3s ease;
+            animation: scaleIn 0.4s ease-out;
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+        }
+
+        .memory-card.flipped {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+        }
+
+        .memory-card.matched {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            cursor: default;
+        }
+
+        /* Puzzle Styles */
+        .puzzle-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .puzzle-item {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .puzzle-item label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #60a5fa;
+            font-weight: 500;
+        }
+
+        .puzzle-item input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .puzzle-item input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .puzzle-item input.correct {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: #22c55e;
+        }
+
+        .puzzle-item input.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* Score Display */
+        .score-display {
+            background: rgba(102, 126, 234, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 1rem 0;
+            border: 2px solid rgba(102, 126, 234, 0.5);
+        }
+
+        .score-display h3 {
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-display p {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Button Group */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            text-align: center;
+            color: #999;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #a78bfa;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .memory-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">🎯 Menschenrechte</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rights.html">Rechte</a></li>
+                    <li><a href="challenges.html">Herausforderungen</a></li>
+                    <li><a href="games.html" style="color: #667eea; font-weight: bold;">🎮 Spiele</a></li>
+                    <li><a href="projects.html">📌 Projekte</a></li>
+                    <li><a href="team.html">👥 Team</a></li>
+                    <li><a href="action.html">Handeln</a></li>
+                    <li><a href="contact.html">✉️ Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="header">
+            <h1>🎮 Interaktive Spiele</h1>
+            <p>Lernen Sie Menschenrechte auf unterhaltsame Weise!</p>
+        </div>
+
+        <!-- Games Grid -->
+        <div class="games-grid">
+            <!-- Quiz Card -->
+            <div class="game-card" onclick="openQuiz()">
+                <div class="game-icon">📝</div>
+                <h2>Quiz</h2>
+                <p>Teste dein Wissen über Menschenrechte mit 5 spannenden Fragen!</p>
+                <button class="btn-play">Spielen →</button>
+            </div>
+
+            <!-- Memory Card -->
+            <div class="game-card" onclick="openMemory()">
+                <div class="game-icon">🧠</div>
+                <h2>Memory</h2>
+                <p>Finde Paare von Menschenrechten und teste dein Gedächtnis!</p>
+                <button class="btn-play">Spielen →</button>
+            </div>
+
+            <!-- Puzzle Card -->
+            <div class="game-card" onclick="openPuzzle()">
+                <div class="game-icon">🧩</div>
+                <h2>Wort-Puzzle</h2>
+                <p>Ergänze die fehlenden Wörter aus der Menschenrechtsdeklaration!</p>
+                <button class="btn-play">Spielen →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeQuiz()">&times;</span>
+            <h2 style="margin-bottom: 1.5rem;">📝 Menschenrechts-Quiz</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="quizProgress" style="width: 0%"></div>
+            </div>
+            <div id="quizContainer"></div>
+        </div>
+    </div>
+
+    <!-- Memory Modal -->
+    <div id="memoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeMemory()">&times;</span>
+            <h2 style="margin-bottom: 1.5rem;">🧠 Memory-Spiel</h2>
+            <div class="score-display">
+                <h3>Gefundene Paare</h3>
+                <p><span id="memoryScore">0</span> / 6</p>
+            </div>
+            <div class="memory-grid" id="memoryGrid"></div>
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="closeMemory()">Schließen</button>
+                <button class="btn btn-primary" onclick="resetMemory()">Neu spielen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Puzzle Modal -->
+    <div id="puzzleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePuzzle()">&times;</span>
+            <h2 style="margin-bottom: 1.5rem;">🧩 Wort-Puzzle</h2>
+            <p style="color: #d0d0d0; margin-bottom: 1.5rem;">Ergänze die fehlenden Wörter:</p>
+            <div class="puzzle-form" id="puzzleContainer"></div>
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="closePuzzle()">Schließen</button>
+                <button class="btn btn-primary" id="puzzleCheckBtn" onclick="checkPuzzle()">Überprüfen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Menschenrechte Schulprojekt | <a href="sources.html">Quellen</a> | <a href="about.html">Über uns</a></p>
+    </footer>
+
+    <script>
+        // Quiz Data
+        const quizQuestions = [
+            {
+                question: "Welcher Artikel der Menschenrechtsdeklaration spricht vom Recht auf Leben?",
+                options: ["Artikel 1", "Artikel 3", "Artikel 5", "Artikel 10"],
+                correct: 1,
+                explanation: "Artikel 3 besagt: 'Jeder hat das Recht auf Leben, Freiheit und Sicherheit der Person.'"
+            },
+            {
+                question: "In welchem Jahr wurde die Allgemeine Erklärung der Menschenrechte verabschiedet?",
+                options: ["1945", "1948", "1950", "1952"],
+                correct: 1,
+                explanation: "Die Allgemeine Erklärung der Menschenrechte wurde am 10. Dezember 1948 von der UN verabschiedet."
+            },
+            {
+                question: "Welche Organisation wurde gegründet, um Menschenrechte zu überwachen?",
+                options: ["NATO", "UNESCO", "Amnesty International", "WHO"],
+                correct: 2,
+                explanation: "Amnesty International ist eine internationale Menschenrechtsorganisation, die 1961 gegründet wurde."
+            },
+            {
+                question: "Verbietet die Menschenrechtsdeklaration Kinderarbeit?",
+                options: ["Ja, explizit in Artikel 24", "Nein, gar nicht", "Nur teilweise", "Nur in Europa"],
+                correct: 0,
+                explanation: "Artikel 24 schützt das Recht auf Ruhe und Freizeit und verbietet ausbeuterische Kinderarbeit."
+            },
+            {
+                question: "Welches Recht schützt die freie Meinungsäußerung?",
+                options: ["Artikel 16", "Artikel 19", "Artikel 25", "Artikel 28"],
+                correct: 1,
+                explanation: "Artikel 19 garantiert das Recht auf Meinungs- und Äußerungsfreiheit."
+            }
+        ];
+
+        const memoryRights = [
+            { right: "Recht auf Leben", icon: "❤️" },
+            { right: "Freiheit von Folter", icon: "🛡️" },
+            { right: "Recht auf Bildung", icon: "📚" },
+            { right: "Meinungsfreiheit", icon: "🗣️" },
+            { right: "Recht auf Arbeit", icon: "💼" },
+            { right: "Recht auf Familie", icon: "👨‍👩‍👧" }
+        ];
+
+        const puzzleQuestions = [
+            { question: "Artikel 1: Alle Menschen sind _____ und an Würde und Rechten gleich.", answer: "frei" },
+            { question: "Artikel 3: Jeder hat das Recht auf _____ und Sicherheit.", answer: "leben" },
+            { question: "Artikel 5: Niemand darf der _____ unterworfen werden.", answer: "folter" },
+            { question: "Artikel 26: Jeder hat das Recht auf _____.", answer: "bildung" }
+        ];
+
+        // Quiz Variables
+        let currentQuestion = 0;
+        let quizScore = 0;
+        let answered = false;
+
+        // Memory Variables
+        let memoryCards = [];
+        let flipped = [];
+        let matched = [];
+        let memoryScore = 0;
+
+        // Puzzle Variables
+        let puzzleAnswers = ['', '', '', ''];
+        let puzzleRevealed = [false, false, false, false];
+
+        // Quiz Functions
+        function openQuiz() {
+            document.getElementById('quizModal').classList.add('active');
+            currentQuestion = 0;
+            quizScore = 0;
+            answered = false;
+            displayQuizQuestion();
+        }
+
+        function closeQuiz() {
+            document.getElementById('quizModal').classList.remove('active');
+        }
+
+        function displayQuizQuestion() {
+            const container = document.getElementById('quizContainer');
+            const question = quizQuestions[currentQuestion];
+            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+
+            document.getElementById('quizProgress').style.width = progress + '%';
+
+            let html = `
+                <div class="quiz-question">
+                    <p style="color: #999; margin-bottom: 1rem;">Frage ${currentQuestion + 1} von ${quizQuestions.length}</p>
+                    <h3>${question.question}</h3>
+                    <div class="quiz-options">
+                        ${question.options.map((option, idx) => `
+                            <div class="quiz-option" onclick="selectAnswer(${idx})" id="option-${idx}">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function selectAnswer(idx) {
+            if (answered) return;
+
+            const question = quizQuestions[currentQuestion];
+            answered = true;
+
+            const options = document.querySelectorAll('.quiz-option');
+            options[idx].classList.add('selected');
+
+            if (idx === question.correct) {
+                options[idx].classList.add('correct');
+                quizScore++;
+            } else {
+                options[idx].classList.add('incorrect');
+                options[question.correct].classList.add('correct');
+            }
+
+            const container = document.getElementById('quizContainer');
+            const explanation = `<div class="explanation">${question.explanation}</div>`;
+            container.innerHTML += explanation;
+
+            const buttonGroup = document.createElement('div');
+            buttonGroup.className = 'button-group';
+            if (currentQuestion < quizQuestions.length - 1) {
+                buttonGroup.innerHTML = `<button class="btn btn-primary" onclick="nextQuestion()">Weiter →</button>`;
+            } else {
+                buttonGroup.innerHTML = `
+                    <button class="btn btn-secondary" onclick="closeQuiz()">Schließen</button>
+                    <button class="btn btn-primary" onclick="openQuiz()">Neu spielen</button>
+                `;
+            }
+            container.appendChild(buttonGroup);
+
+            container.innerHTML += `
+                <div class="score-display">
+                    <h3>Dein Ergebnis</h3>
+                    <p>${quizScore} / ${quizQuestions.length} richtig</p>
+                </div>
+            `;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            answered = false;
+            displayQuizQuestion();
+        }
+
+        // Memory Functions
+        function openMemory() {
+            document.getElementById('memoryModal').classList.add('active');
+            initMemory();
+        }
+
+        function closeMemory() {
+            document.getElementById('memoryModal').classList.remove('active');
+        }
+
+        function initMemory() {
+            const shuffled = [...memoryRights, ...memoryRights].sort(() => Math.random() - 0.5);
+            memoryCards = shuffled;
+            flipped = new Array(shuffled.length).fill(false);
+            matched = new Array(shuffled.length).fill(false);
+            memoryScore = 0;
+            displayMemory();
+        }
+
+        function displayMemory() {
+            const grid = document.getElementById('memoryGrid');
+            grid.innerHTML = memoryCards.map((card, idx) => `
+                <div class="memory-card ${flipped[idx] || matched[idx] ? 'flipped' : ''} ${matched[idx] ? 'matched' : ''}"
+                     onclick="flipCard(${idx})"
+                     id="card-${idx}">
+                    ${(flipped[idx] || matched[idx]) ? card.icon : '?'}
+                </div>
+            `).join('');
+            document.getElementById('memoryScore').textContent = memoryScore;
+        }
+
+        function flipCard(idx) {
+            if (flipped[idx] || matched[idx]) return;
+
+            flipped[idx] = true;
+            displayMemory();
+
+            const flippedIndices = flipped.map((f, i) => f && !matched[i] ? i : null).filter(i => i !== null);
+
+            if (flippedIndices.length === 2) {
+                const [first, second] = flippedIndices;
+                if (memoryCards[first].icon === memoryCards[second].icon) {
+                    matched[first] = true;
+                    matched[second] = true;
+                    memoryScore++;
+                    displayMemory();
+                    flipped = new Array(flipped.length).fill(false);
+                } else {
+                    setTimeout(() => {
+                        flipped[first] = false;
+                        flipped[second] = false;
+                        displayMemory();
+                    }, 1000);
+                }
+            }
+        }
+
+        function resetMemory() {
+            initMemory();
+        }
+
+        // Puzzle Functions
+        function openPuzzle() {
+            document.getElementById('puzzleModal').classList.add('active');
+            displayPuzzle();
+        }
+
+        function closePuzzle() {
+            document.getElementById('puzzleModal').classList.remove('active');
+        }
+
+        function displayPuzzle() {
+            const container = document.getElementById('puzzleContainer');
+            container.innerHTML = puzzleQuestions.map((q, idx) => `
+                <div class="puzzle-item">
+                    <label>${q.question}</label>
+                    <input type="text" id="puzzle-${idx}" placeholder="Deine Antwort..."
+                           onchange="puzzleAnswers[${idx}] = this.value"
+                           ${puzzleRevealed[idx] ? 'disabled' : ''}>
+                </div>
+            `).join('');
+
+            const checkBtn = document.getElementById('puzzleCheckBtn');
+            if (puzzleRevealed[0]) {
+                checkBtn.textContent = 'Neu spielen';
+                checkBtn.onclick = () => {
+                    puzzleAnswers = ['', '', '', ''];
+                    puzzleRevealed = [false, false, false, false];
+                    displayPuzzle();
+                };
+            }
+        }
+
+        function checkPuzzle() {
+            let score = 0;
+            puzzleQuestions.forEach((q, idx) => {
+                const input = document.getElementById(`puzzle-${idx}`);
+                const isCorrect = puzzleAnswers[idx].toLowerCase() === q.answer.toLowerCase();
+                puzzleRevealed[idx] = true;
+                if (isCorrect) {
+                    score++;
+                    input.classList.add('correct');
+                } else {
+                    input.classList.add('incorrect');
+                }
+                input.value = puzzleAnswers[idx] || '';
+                input.disabled = true;
+            });
+
+            const container = document.getElementById('puzzleContainer');
+            container.innerHTML += `
+                <div class="score-display" style="margin-top: 2rem;">
+                    <h3>Dein Ergebnis</h3>
+                    <p>${score} / ${puzzleQuestions.length} richtig</p>
+                </div>
+            `;
+
+            const checkBtn = document.getElementById('puzzleCheckBtn');
+            checkBtn.textContent = 'Neu spielen';
+            checkBtn.onclick = () => {
+                puzzleAnswers = ['', '', '', ''];
+                puzzleRevealed = [false, false, false, false];
+                displayPuzzle();
+            };
+        }
+    </script>
+</body>
+</html>
