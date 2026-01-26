@@ -1,84 +1,32 @@
 'use client';
 
 import Head from 'next/head';
+import { projectGroups, projectStats } from '../data/projects';
+import { downloadProjectsCSV } from '../data/projectExport';
 
-interface TeamMember {
+interface ProjectGroup {
   id: number;
   name: string;
-  role: string;
-  skills: string[];
+  teamName: string;
+  members: string[];
+  focus: string;
+  description: string;
   icon: string;
-  bio: string;
   color: string;
 }
 
-const teamMembers: TeamMember[] = [
-  {
-    id: 1,
-    name: "Maria Schmidt",
-    role: "Projektleitung & Design",
-    skills: ["UI/UX Design", "Projektmanagement", "Recherche"],
-    icon: "👩‍💼",
-    bio: "Maria führt das Projekt an und kümmert sich um das visuelle Design sowie die Koordination aller Arbeiten.",
-    color: "from-pink-500 to-rose-500"
-  },
-  {
-    id: 2,
-    name: "Lars Müller",
-    role: "Entwicklung & Technik",
-    skills: ["Frontend", "React/Next.js", "Datenvisualisierung"],
-    icon: "👨‍💻",
-    bio: "Lars entwickelt die technische Infrastruktur und implementiert alle interaktiven Features der Website.",
-    color: "from-blue-500 to-cyan-500"
-  },
-  {
-    id: 3,
-    name: "Sophie Wagner",
-    role: "Inhalte & Recherche",
-    skills: ["Recherche", "Texterstellung", "Dokumentation"],
-    icon: "👩‍🔬",
-    bio: "Sophie recherchiert umfassend zu Menschenrechtsthemen und erstellt prägnante, informative Inhalte.",
-    color: "from-purple-500 to-indigo-500"
-  },
-  {
-    id: 4,
-    name: "Felix Schneider",
-    role: "Datenanalyse & Grafiken",
-    skills: ["Datenvisualisierung", "Grafik-Design", "Animation"],
-    icon: "👨‍🎨",
-    bio: "Felix erstellt beeindruckende Visualisierungen und Animationen, die komplexe Daten verständlich machen.",
-    color: "from-orange-500 to-yellow-500"
-  },
-  {
-    id: 5,
-    name: "Emma Hoffmann",
-    role: "Spiele & Interaktion",
-    skills: ["Game Design", "Interaktive Erlebnisse", "User Testing"],
-    icon: "🎮",
-    bio: "Emma entwickelt unterhaltsame Spiele und interaktive Elemente, um das Lernen spannend zu gestalten.",
-    color: "from-green-500 to-emerald-500"
-  },
-  {
-    id: 6,
-    name: "Jonas Weber",
-    role: "Multimedia & Kommunikation",
-    skills: ["Video-Bearbeitung", "Audio-Production", "Social Media"],
-    icon: "🎬",
-    bio: "Jonas produziert Videoinhalte und kümmert sich um die Kommunikation mit der Zielgruppe.",
-    color: "from-red-500 to-pink-500"
-  }
-];
-
-const milestones = [
-  { date: "Sept 2025", title: "Projektstart", desc: "Ideenentwicklung und Planung" },
-  { date: "Okt 2025", title: "Recherchephase", desc: "Umfangreiche Recherche zu Menschenrechten" },
-  { date: "Nov 2025", title: "Entwicklung", desc: "Technische Umsetzung beginnt" },
-  { date: "Dez 2025", title: "Beta-Launch", desc: "Erste Version online" },
-  { date: "Jan 2026", title: "Schülerprojekte", desc: "Integration der Mitschülerprojekte" },
-  { date: "Feb 2026", title: "Finales Launch", desc: "Vollständige Website live" }
-];
-
 export default function Team() {
+  const handleDownloadProjects = () => {
+    const jsonData = JSON.stringify(projectGroups, null, 2);
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(jsonData));
+    element.setAttribute('download', 'schuelerprojekte.json');
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
+
   return (
     <>
       <Head>
@@ -91,18 +39,32 @@ export default function Team() {
           {/* Header */}
           <div className="text-center mb-16 animate-fade-in">
             <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 mb-4">
-              Unser Team
+              Schülerprojekte
             </h1>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Engagierte Schüler, die sich leidenschaftlich für die Vermittlung von Menschenrechten einsetzen
+              {projectStats.totalMembers} Schüler:innen in {projectStats.totalGroups} Gruppen arbeiten an innovativen Menschenrechtsprojekten
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button
+                onClick={handleDownloadProjects}
+                className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-600 transition-all transform hover:scale-105 shadow-lg"
+              >
+                📥 JSON herunterladen
+              </button>
+              <button
+                onClick={downloadProjectsCSV}
+                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-lg"
+              >
+                📊 CSV herunterladen
+              </button>
+            </div>
           </div>
 
-          {/* Team Members Grid */}
+          {/* Project Groups Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-            {teamMembers.map((member, index) => (
+            {projectGroups.map((group, index) => (
               <div
-                key={member.id}
+                key={group.id}
                 className="group animate-fade-in"
                 style={{
                   animationDelay: `${index * 100}ms`,
@@ -110,7 +72,7 @@ export default function Team() {
                 }}
               >
                 <div
-                  className={`relative bg-gradient-to-br ${member.color} rounded-2xl overflow-hidden h-full transform transition-all duration-500 hover:scale-105`}
+                  className={`relative bg-gradient-to-br ${group.color} rounded-2xl overflow-hidden h-full transform transition-all duration-500 hover:scale-105`}
                 >
                   {/* Background Overlay */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-white transition-opacity duration-500"></div>
@@ -118,31 +80,31 @@ export default function Team() {
                   {/* Content */}
                   <div className="relative p-8 flex flex-col h-full">
                     {/* Icon */}
-                    <div className="text-6xl mb-4 animate-bounce" style={{ animationDelay: `${index * 200}ms` }}>
-                      {member.icon}
+                    <div className="text-6xl mb-4">
+                      {group.icon}
                     </div>
 
-                    {/* Name and Role */}
-                    <h3 className="text-2xl font-bold text-white mb-2">{member.name}</h3>
-                    <p className="text-sm font-semibold text-white/90 mb-4 uppercase tracking-wider">
-                      {member.role}
+                    {/* Group Name and Focus */}
+                    <h3 className="text-2xl font-bold text-white mb-2">{group.name}</h3>
+                    <p className="text-sm font-semibold text-white/90 mb-2 uppercase tracking-wider">
+                      {group.focus}
                     </p>
 
-                    {/* Bio */}
+                    {/* Description */}
                     <p className="text-sm text-white/80 mb-6 flex-grow">
-                      {member.bio}
+                      {group.description}
                     </p>
 
-                    {/* Skills */}
+                    {/* Team Members */}
                     <div className="space-y-2">
-                      <p className="text-xs text-white/70 uppercase tracking-wider">Fähigkeiten</p>
+                      <p className="text-xs text-white/70 uppercase tracking-wider">Teamglieder</p>
                       <div className="flex flex-wrap gap-2">
-                        {member.skills.map((skill, i) => (
+                        {group.members.map((member, i) => (
                           <span
                             key={i}
                             className="text-xs bg-white/20 text-white px-3 py-1 rounded-full backdrop-blur hover:bg-white/30 transition-colors"
                           >
-                            {skill}
+                            {member}
                           </span>
                         ))}
                       </div>
@@ -153,37 +115,21 @@ export default function Team() {
             ))}
           </div>
 
-          {/* Project Timeline */}
+          {/* Project Info Section */}
           <div className="mb-20">
-            <h2 className="text-4xl font-bold text-white mb-12 text-center">Projektmeilensteine</h2>
-            <div className="relative">
-              {/* Timeline Line */}
-              <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500"></div>
-
-              {/* Timeline Items */}
-              <div className="space-y-12">
-                {milestones.map((milestone, index) => (
-                  <div
-                    key={index}
-                    className={`flex items-center gap-8 animate-fade-in ${
-                      index % 2 === 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'
-                    }`}
-                    style={{
-                      animationDelay: `${index * 100}ms`,
-                      animationDuration: '600ms'
-                    }}
-                  >
-                    {/* Timeline Dot */}
-                    <div className="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full border-4 border-slate-900 shadow-lg shadow-blue-500/50 lg:relative lg:left-0"></div>
-
-                    {/* Content */}
-                    <div className={`flex-1 bg-gray-800 rounded-lg p-6 ${index % 2 === 0 ? 'lg:text-right' : ''}`}>
-                      <p className="text-sm font-bold text-blue-400 uppercase tracking-wider">{milestone.date}</p>
-                      <h3 className="text-xl font-bold text-white mt-1">{milestone.title}</h3>
-                      <p className="text-gray-400 mt-2">{milestone.desc}</p>
-                    </div>
-                  </div>
-                ))}
+            <h2 className="text-4xl font-bold text-white mb-12 text-center">Projektstatistiken</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-gradient-to-br from-blue-600 to-blue-500 rounded-2xl p-8 text-center text-white transform hover:scale-105 transition-all">
+                <p className="text-5xl font-bold mb-2">{projectStats.totalGroups}</p>
+                <p className="text-lg opacity-90">Projektgruppen</p>
+              </div>
+              <div className="bg-gradient-to-br from-purple-600 to-purple-500 rounded-2xl p-8 text-center text-white transform hover:scale-105 transition-all">
+                <p className="text-5xl font-bold mb-2">{projectStats.totalMembers}</p>
+                <p className="text-lg opacity-90">Schüler:innen</p>
+              </div>
+              <div className="bg-gradient-to-br from-pink-600 to-pink-500 rounded-2xl p-8 text-center text-white transform hover:scale-105 transition-all">
+                <p className="text-lg opacity-90">Maintainer</p>
+                <p className="text-2xl font-bold mt-2">{projectStats.maintainer}</p>
               </div>
             </div>
           </div>
@@ -192,8 +138,8 @@ export default function Team() {
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center text-white animate-fade-in">
             <h2 className="text-3xl font-bold mb-4">Unsere Mission</h2>
             <p className="text-lg max-w-3xl mx-auto">
-              Wir möchten junge Menschen inspirieren und aufklären über Menschenrechte. Durch kreative, interaktive und unterhaltsame Inhalte 
-              machen wir ein wichtiges Thema zugänglich und zeigen, dass jeder von uns einen Unterschied machen kann.
+              Mit diesen kreativen Projekten zeigen unsere Schüler:innen innovativen Wege auf, wie komplexe Menschenrechtsthemen vermittelt werden können. 
+              Jede Gruppe bringt ihre einzigartigen Fähigkeiten und Perspektiven ein, um ein wichtiges Thema für junge Menschen zugänglich zu machen.
             </p>
           </div>
         </div>

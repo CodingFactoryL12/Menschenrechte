@@ -1,6 +1,6 @@
 # Menschenrechte - Schulprojekt
 
-Eine Website über Menschenrechte, erstellt als Schulprojekt von Leon F. (8. Klasse).
+Eine Website über Menschenrechte, erstellt als Schulprojekt. Maintainer: Leon Friedrich (8. Klasse).
 
 ## 📖 Inhalte
 
@@ -9,6 +9,7 @@ Die Website behandelt folgende Themen:
 - Aktuelle Herausforderungen (Kinderarbeit, Sklaverei, Diskriminierung, Flüchtlinge)
 - Was man tun kann (praktische Tipps und Organisationen)
 - Vollständiges Quellenverzeichnis
+- Schülerprojekte - 8 Gruppen mit kreativen Umsetzungen
 
 ## 🌐 Seiten
 

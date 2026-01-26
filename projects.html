@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schülerprojekte | Menschenrechte</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         * {
             margin: 0;
@@ -13,8 +14,8 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3a8a 0%, #1a1a2e 50%, #16213e 100%);
-            color: #fff;
+            background: #f9fafb;
+            color: #1f2937;
             min-height: 100vh;
         }
 
@@ -33,7 +34,7 @@
         .header h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -42,7 +43,7 @@
 
         .header p {
             font-size: 1.3rem;
-            color: #e0e0e0;
+            color: #6b7280;
             animation: slideInUp 0.8s ease-out 0.2s both;
         }
 
@@ -58,9 +59,9 @@
 
         .filter-btn {
             padding: 0.8rem 1.5rem;
-            background: rgba(102, 126, 234, 0.1);
-            border: 2px solid rgba(102, 126, 234, 0.3);
-            color: #fff;
+            background: white;
+            border: 2px solid #e5e7eb;
+            color: #667eea;
             border-radius: 20px;
             cursor: pointer;
             font-weight: 600;
@@ -68,13 +69,14 @@
         }
 
         .filter-btn:hover {
-            background: rgba(102, 126, 234, 0.3);
-            border-color: rgba(102, 126, 234, 0.8);
+            background: #f3f4f6;
+            border-color: #667eea;
         }
 
         .filter-btn.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-color: #667eea;
+            color: white;
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
@@ -87,14 +89,15 @@
         }
 
         .project-card {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            border: 2px solid rgba(102, 126, 234, 0.3);
+            background: white;
+            border: 2px solid #e5e7eb;
             border-radius: 15px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.3s ease;
             animation: fadeInScale 0.6s ease-out;
             position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .project-card::before {
@@ -104,7 +107,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
             transition: left 0.5s ease;
             z-index: 1;
         }
@@ -115,8 +118,8 @@
 
         .project-card:hover {
             transform: translateY(-10px);
-            border-color: rgba(102, 126, 234, 0.8);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
         }
 
         .project-content {
@@ -134,8 +137,8 @@
 
         .project-category {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
+            background: #f3f4f6;
+            color: #667eea;
             font-size: 0.8rem;
             font-weight: bold;
             padding: 0.3rem 0.8rem;
@@ -146,17 +149,17 @@
         .project-card h2 {
             font-size: 1.5rem;
             margin: 0.5rem 0;
-            color: #fff;
+            color: #1f2937;
         }
 
         .project-author {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
+            color: #6b7280;
             margin-bottom: 1rem;
         }
 
         .project-description {
-            color: #d0d0d0;
+            color: #6b7280;
             margin-bottom: 1rem;
             line-height: 1.5;
         }
@@ -169,8 +172,8 @@
         }
 
         .project-tag {
-            background: rgba(102, 126, 234, 0.2);
-            color: #60a5fa;
+            background: #f3f4f6;
+            color: #667eea;
             padding: 0.3rem 0.7rem;
             border-radius: 15px;
             font-size: 0.8rem;
@@ -179,9 +182,9 @@
         .btn-details {
             width: 100%;
             padding: 0.8rem;
-            background: rgba(102, 126, 234, 0.2);
-            border: 2px solid rgba(102, 126, 234, 0.5);
-            color: #fff;
+            background: white;
+            border: 2px solid #e5e7eb;
+            color: #667eea;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
@@ -189,8 +192,9 @@
         }
 
         .btn-details:hover {
-            background: rgba(102, 126, 234, 0.4);
-            border-color: rgba(102, 126, 234, 0.8);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #667eea;
+            color: white;
         }
 
         /* Modal */
@@ -214,19 +218,19 @@
         }
 
         .modal-content {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2d5a8c 100%);
+            background: white;
             padding: 2rem;
             border-radius: 15px;
             max-width: 600px;
             width: 90%;
             margin: auto;
             animation: slideInUp 0.3s ease-out;
-            border: 2px solid rgba(102, 126, 234, 0.5);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 2px solid #e5e7eb;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
         .close-btn {
-            color: #fff;
+            color: #667eea;
             float: right;
             font-size: 2rem;
             font-weight: bold;
@@ -235,7 +239,7 @@
         }
 
         .close-btn:hover {
-            color: #667eea;
+            color: #764ba2;
         }
 
         .modal-header {
@@ -251,11 +255,12 @@
 
         .modal-title h2 {
             margin-bottom: 0.5rem;
+            color: #1f2937;
         }
 
         .modal-meta {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
+            color: #6b7280;
             display: flex;
             flex-direction: column;
             gap: 0.25rem;
@@ -266,13 +271,13 @@
         }
 
         .modal-body h3 {
-            color: #60a5fa;
+            color: #667eea;
             margin-bottom: 1rem;
             font-size: 1.2rem;
         }
 
         .modal-body p {
-            color: #d0d0d0;
+            color: #6b7280;
             line-height: 1.6;
             margin-bottom: 1rem;
         }
@@ -282,7 +287,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
             margin: 1rem 0;
-            background: rgba(102, 126, 234, 0.1);
+            background: #f9fafb;
             padding: 1rem;
             border-radius: 8px;
         }
@@ -295,7 +300,7 @@
         }
 
         .modal-info-item p:last-child {
-            color: #fff;
+            color: #1f2937;
             font-weight: bold;
         }
 
@@ -307,8 +312,8 @@
         }
 
         .modal-tag {
-            background: rgba(102, 126, 234, 0.3);
-            color: #60a5fa;
+            background: #f3f4f6;
+            color: #667eea;
             padding: 0.5rem 1rem;
             border-radius: 15px;
             font-size: 0.9rem;
@@ -331,13 +336,14 @@
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: white;
+            color: #667eea;
+            border: 2px solid #e5e7eb;
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: #f9fafb;
+            border-color: #667eea;
         }
 
         .btn-primary {
@@ -360,14 +366,15 @@
         }
 
         .stat-card {
-            background: rgba(102, 126, 234, 0.1);
-            border: 2px solid rgba(102, 126, 234, 0.3);
+            background: white;
+            border: 2px solid #e5e7eb;
             border-radius: 10px;
             padding: 2rem;
             text-align: center;
             transition: all 0.3s ease;
             animation: slideInUp 0.6s ease-out forwards;
             opacity: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .stat-card:nth-child(1) { animation-delay: 0.2s; }
@@ -376,15 +383,16 @@
         .stat-card:nth-child(4) { animation-delay: 0.8s; }
 
         .stat-card:hover {
-            border-color: rgba(102, 126, 234, 0.8);
-            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+            background: #f9fafb;
             transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
         }
 
         .stat-number {
             font-size: 2.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -399,12 +407,12 @@
 
         /* Footer */
         footer {
-            background: rgba(0, 0, 0, 0.3);
+            background: #f9fafb;
             padding: 2rem;
             text-align: center;
-            color: #999;
+            color: #6b7280;
             margin-top: 3rem;
-            border-top: 1px solid rgba(102, 126, 234, 0.3);
+            border-top: 1px solid #e5e7eb;
         }
 
         footer a {
@@ -482,7 +490,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
-                <a href="index.html" class="logo">🎯 Menschenrechte</a>
+                <a href="index.html" class="logo">� Menschenrechte</a>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="rights.html">Rechte</a></li>
@@ -500,16 +508,17 @@
     <!-- Main Content -->
     <div class="container">
         <div class="header">
-            <h1>📌 Schülerprojekte <span style="display: inline-block; margin-left: 1rem; font-size: 0.7em; font-weight: normal; color: #666;">Kreative Werke zum Thema Menschenrechte</span></h1>
+            <h1>🏆 Schülerprojekte - Wettbewerbsbeiträge</h1>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">8 kreative Schülergruppen mit innovativen Ansätzen zum Thema Menschenrechte</p>
         </div>
 
         <!-- Filter Buttons -->
         <div class="filter-buttons">
-            <button class="filter-btn active" onclick="filterProjects('all')">Alle</button>
-            <button class="filter-btn" onclick="filterProjects('game')">🎮 Spiele</button>
-            <button class="filter-btn" onclick="filterProjects('interactive')">🖱️ Interaktiv</button>
-            <button class="filter-btn" onclick="filterProjects('video')">🎬 Video</button>
-            <button class="filter-btn" onclick="filterProjects('art')">🎨 Kunst</button>
+            <button class="filter-btn active" onclick="filterProjects('all')">Alle Gruppen</button>
+            <button class="filter-btn" onclick="filterProjects('video')">🎬 Video & Multimedia</button>
+            <button class="filter-btn" onclick="filterProjects('art')">🎨 Visuelle Kunst</button>
+            <button class="filter-btn" onclick="filterProjects('text')">📖 Text & Storytelling</button>
+            <button class="filter-btn" onclick="filterProjects('animation')">✨ Animation</button>
         </div>
 
         <!-- Projects Grid -->
@@ -519,19 +528,19 @@
         <div class="stats-section">
             <div class="stat-card">
                 <div class="stat-number">8</div>
-                <div class="stat-label">Projekte</div>
+                <div class="stat-label">Projektgruppen</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">16</div>
-                <div class="stat-label">Schüler</div>
+                <div class="stat-number">25</div>
+                <div class="stat-label">Schüler:innen</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">5</div>
                 <div class="stat-label">Kategorien</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">Kreativität</div>
+                <div class="stat-number">🏆</div>
+                <div class="stat-label">Wettbewerbs-Beiträge</div>
             </div>
         </div>
     </div>
@@ -580,91 +589,91 @@
         const projects = [
             {
                 id: 1,
-                title: "Menschenrechts-Quiz",
-                author: "Maria & Lars",
-                category: 'game',
-                icon: '🎮',
-                shortDesc: "Interaktives Quiz über globale Menschenrechte",
-                fullDesc: "Ein unterhaltsames Quiz-Spiel, das Spieler durch verschiedene Szenarien führt und ihr Wissen über Menschenrechte testet. Mit Leaderboard und Achievements.",
-                mediaType: 'HTML5 Game',
-                tags: ['Quiz', 'Bildung', 'Interaktiv'],
+                title: "Gruppe 1 - Videoproduktion",
+                author: "Luis, Noah, Micky",
+                category: 'video',
+                icon: '🎬',
+                shortDesc: "Professionelle Videoaufnahmen zu Menschenrechtsthemen",
+                fullDesc: "Diese Schülergruppe produziert aussagekräftige Videoaufnahmen zu verschiedenen Menschenrechtsverletzungen. Sie recherchieren kritische Fälle, planen Dreharbeiten und schneiden professionelle Videos, die komplexe Inhalte verständlich und emotional vermitteln.",
+                mediaType: 'Video',
+                tags: ['Videoproduktion', 'Recherche', 'Storytelling'],
             },
             {
                 id: 2,
-                title: "Escape Room: Freiheit",
-                author: "Jonas & Emma",
-                category: 'game',
-                icon: '🔐',
-                shortDesc: "Ein digitales Escape Room Abenteuer",
-                fullDesc: "Löse Rätsel und Aufgaben, um mehr über Freiheitsrechte zu erfahren. Der Escape Room verbindet Spaß mit Bildung.",
-                mediaType: 'Interactive Web Game',
-                tags: ['Adventure', 'Rätsel', 'Spielerisch'],
+                title: "Gruppe 2 - Illustration & Grafiken",
+                author: "Greta, Marla",
+                category: 'art',
+                icon: '🎨',
+                shortDesc: "Wunderschöne Illustrationen zu Menschenrechten",
+                fullDesc: "Greta und Marla erstellen künstlerische Illustrationen und grafische Darstellungen, die Menschenrechtsthemen auf visuell einprägsame Weise vermitteln. Ihre Kunstwerke helfen, abstrakte Konzepte konkret und emotional zugänglich zu machen.",
+                mediaType: 'Illustration',
+                tags: ['Illustration', 'Grafik-Design', 'Visuelles Storytelling'],
             },
             {
                 id: 3,
-                title: "Dokumentation: Stimmen der Welt",
-                author: "Sophie & Alex",
-                category: 'video',
-                icon: '🎬',
-                shortDesc: "Interviews mit Menschen aus verschiedenen Ländern",
-                fullDesc: "Eine berührende Dokumentation mit persönlichen Geschichten von Menschen, deren Menschenrechte eingeschränkt waren.",
-                mediaType: 'Video (8 Min)',
-                tags: ['Dokumentation', 'Interviews', 'Authentisch'],
+                title: "Gruppe 3 - Visuelle Gestaltung",
+                author: "Emilia, Amelie, Hannah",
+                category: 'art',
+                icon: '✏️',
+                shortDesc: "Umfangreiche visuelle Projekte mit verschiedenen Techniken",
+                fullDesc: "Dieses erfahrene Illustrator:innen-Team arbeitet an umfangreichen visuellen Projekten. Sie kombinieren verschiedene Techniken und Stile, um emotionale und aussagekräftige Darstellungen von Menschenrechtsfragen zu schaffen.",
+                mediaType: 'Illustration',
+                tags: ['Visuelle Kunst', 'Technikmix', 'Kreativität'],
             },
             {
                 id: 4,
-                title: "Interaktive Weltkarte",
-                author: "Felix & Lisa",
-                category: 'interactive',
-                icon: '🌍',
-                shortDesc: "Erkunde Menschenrechtssituationen weltweit",
-                fullDesc: "Eine dynamische Weltkarte mit animierten Daten über Menschenrechtsverletzungen und -erfolge in verschiedenen Ländern.",
-                mediaType: 'Web Application',
-                tags: ['Datenvisualisierung', 'Global', 'Dynamisch'],
+                title: "Gruppe 4 - Text & Illustration",
+                author: "Johann, Emilia, Elias",
+                category: 'art',
+                icon: '📝',
+                shortDesc: "Multimedia-Projekte mit Text und Bildern",
+                fullDesc: "Johann, Emilia und Elias verbinden visuelle Kunst mit aussagekräftigen Texten. Ihr multimedialer Ansatz ermöglicht eine tiefere und facettenreichere Vermittlung von Menschenrechtsthemen durch die Kombination von Bild und Wort.",
+                mediaType: 'Mixed Media',
+                tags: ['Text & Grafik', 'Multimedia', 'Hybrid-Ansatz'],
             },
             {
                 id: 5,
-                title: "Kunstinstallation: Mauern der Angst",
-                author: "Mira & Tim",
-                category: 'art',
-                icon: '🎨',
-                shortDesc: "Digitale Kunstinstallation mit Interaktion",
-                fullDesc: "Eine visuell beeindruckende Installation, die Mauern darstellt, die Menschen voneinander trennen.",
-                mediaType: '3D Animation',
-                tags: ['Kunst', 'Symbolisch', 'Bewegend'],
+                title: "Gruppe 5 - Storytelling & Narrative",
+                author: "Ole, Mathias",
+                category: 'text',
+                icon: '📖',
+                shortDesc: "Fesselnde Geschichten über Menschenrechte",
+                fullDesc: "Ole und Mathias erzählen Geschichten, die inspirieren und aufklären. Sie recherchieren Menschenrechtsfälle und formen sie in fesselnde Narrative, die zeigen, wie Menschenrechte das tägliche Leben beeinflussen. Ihre Geschichten bringen echte Menschenrechtsthemen nah und persönlich.",
+                mediaType: 'Text & Geschichten',
+                tags: ['Storytelling', 'Recherche', 'Narrative'],
             },
             {
                 id: 6,
-                title: "Podcast-Serie: Stimmen der Gerechtigkeit",
-                author: "Anna & David",
-                category: 'interactive',
-                icon: '🎙️',
-                shortDesc: "Audio-Geschichten über Menschenrechtskämpfer",
-                fullDesc: "Eine fesselnde Podcast-Serie mit Geschichten von mutigen Menschen, die für Menschenrechte kämpfen.",
-                mediaType: 'Podcast (6 Episoden)',
-                tags: ['Audio', 'Inspirierend', 'Geschichten'],
+                title: "Gruppe 6 - Comic-Kreation",
+                author: "Max B.",
+                category: 'art',
+                icon: '💭',
+                shortDesc: "Einprägsame Comics zu Menschenrechtsthemen",
+                fullDesc: "Max B. kreiert einprägsame Comics, die Menschenrechtsthemen humorvoll, kreativ und leicht verständlich darstellen. Comics bieten eine perfekte Möglichkeit, gerade junge Menschen zu erreichen und zum Nachdenken anzuregen.",
+                mediaType: 'Comic-Art',
+                tags: ['Comic', 'Satire', 'Visuelle Kommunikation'],
             },
             {
                 id: 7,
-                title: "Bildungs-App: Rechte lernen",
-                author: "Max & Charlotte",
-                category: 'game',
-                icon: '📱',
-                shortDesc: "Gamifizierte Lern-App für alle Altersgruppen",
-                fullDesc: "Eine umfassende Mobile App mit Lernmodulen, Mini-Games und Quizzes. Mit Fortschrittsanzeige und persönlichem Lernplan.",
-                mediaType: 'Mobile App',
-                tags: ['Bildung', 'Gamification', 'Responsive'],
+                title: "Gruppe 7 - Datenvisualisierung & Karikatur",
+                author: "Noel, Oskar",
+                category: 'art',
+                icon: '📊',
+                shortDesc: "Schaubilder und Karikaturen zu Menschenrechtsdaten",
+                fullDesc: "Noel und Oskar verwandeln komplexe Daten in verständliche Schaubilder und nutzen Karikaturen, um kritische Punkte pointiert hervorzuheben. Ihre Arbeit macht Statistiken und Zahlen zu Menschenrechtsthemen anschaulich und einprägsam.",
+                mediaType: 'Infografik & Karikatur',
+                tags: ['Datenvisualisierung', 'Infografik', 'Grafik-Design'],
             },
             {
                 id: 8,
-                title: "Animierter Kurzfilm",
-                author: "Nina & Paul",
-                category: 'video',
-                icon: '✨',
-                shortDesc: "Ein bewegender animierter Film über Gleichberechtigung",
-                fullDesc: "Ein professionell animierter Kurzfilm, der die Geschichte einer Person zeigt, die für ihre Rechte kämpft.",
-                mediaType: 'Animation (5 Min)',
-                tags: ['Animation', 'Emotional', 'Visuell'],
+                title: "Gruppe 8 - Stop-Motion Animation",
+                author: "Xenia, Finja, Helene",
+                category: 'animation',
+                icon: '🎞️',
+                shortDesc: "Faszinierende Stop-Motion-Animationen",
+                fullDesc: "Xenia, Finja und Helene kreieren faszinierende Stop-Motion-Animationen, die Menschenrechtsthemen zum Leben erwecken. Diese aufwändige Technik ermöglicht kreative und zeitlose Darstellungen wichtiger sozialer Botschaften.",
+                mediaType: 'Stop-Motion Animation',
+                tags: ['Animation', 'Stop-Motion', 'Filmproduktion'],
             }
         ];
 
