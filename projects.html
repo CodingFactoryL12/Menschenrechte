@@ -530,7 +530,7 @@
     <div class="container">
         <div class="header">
             <h1>🏆 Schülerprojekte - Wettbewerbsbeiträge</h1>
-            <p style="font-size: 1.1rem; margin-top: 1rem;">8 kreative Schülergruppen mit innovativen Ansätzen zum Thema Menschenrechte</p>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">11 kreative Projekte mit innovativen Ansätzen zum Thema Menschenrechte</p>
         </div>
 
         <!-- Filter Buttons -->
@@ -548,11 +548,11 @@
         <!-- Stats Section -->
         <div class="stats-section">
             <div class="stat-card">
-                <div class="stat-number">8</div>
-                <div class="stat-label">Projektgruppen</div>
+                <div class="stat-number">11</div>
+                <div class="stat-label">Projekte</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">23</div>
+                <div class="stat-number">26</div>
                 <div class="stat-label">Schüler:innen</div>
             </div>
             <div class="stat-card">
@@ -560,8 +560,8 @@
                 <div class="stat-label">Kategorien</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">🏆</div>
-                <div class="stat-label">Wettbewerbs-Beiträge</div>
+                <div class="stat-number">6</div>
+                <div class="stat-label">Betreuende Lehrkräfte</div>
             </div>
         </div>
     </div>
@@ -680,6 +680,10 @@
                 icon: '💭',
                 shortDesc: "Einprägsame Comics zu Menschenrechtsthemen",
                 fullDesc: "Max B. kreiert einprägsame Comics, die Menschenrechtsthemen humorvoll, kreativ und leicht verständlich darstellen. Comics bieten eine perfekte Möglichkeit, gerade junge Menschen zu erreichen und zum Nachdenken anzuregen.",
+                files: [
+                    "src/assets/Europäischer Wettbewerb-2.jpeg",
+                    "src/assets/Europäischer Wettbewerb-3.jpeg"
+                ],
                 mediaType: 'Comic-Art',
                 tags: ['Comic', 'Satire', 'Visuelle Kommunikation'],
             },
@@ -746,6 +750,18 @@
                 fullDesc: `Heute war der Schulunterricht viiieeeel spannender als sonst! Wir hatten nämlich das Thema „Rechte“ im PoWi-Unterricht. Ich mag PoWi normalerweise nicht, aber heute war es voll spannend! Zum Beispiel haben wir gelernt, dass die Rechte, beziehungsweise Menschenrechte, im Deutschen „Grundrechte" genannt werden und diese aus 30 Artikeln bestehen! Ganze DREIßIG Artikel! Das sind ziemlich viele Menschenrechte, aber sie sind wichtig für ein faires Leben. Außerdem wurde am 10. Dezember 1948 die Allgemeine Erklärung der Menschenrechte von der Generalversammlung der Vereinten Nationen in Paris angenommen, deshalb ist auch am 10. Dezember der Internationale Tag der Menschenrechte. Wir haben aber auch gelernt, dass nicht alle Länder alle Menschenrechte beachten, zum Beispiel die „Gedanken-, Gewissens- & Religionsfreiheit“ aus Artikel 18 oder die „Meinungs- & Informationsfreiheit“ aus Artikel 19. Ich denke die Menschenrechte sollten in jedem Land beachtet werden, und zwar jedes einzelne Menschenrecht. Ich finde es nicht fair gegenüber anderen Menschen, dass die Menschenrechte missachtet werden. Meiner Meinung nach müssen wir alle Rechte schützen, sie sorgen für Gleichberechtigung und Respekt, zwei Sachen, welche essenziell sind für unsere Gesellschaft. Und auch wenn die Menschenrechte nicht in allen Ländern auf der Welt respektiert werden, sollten wir vielleicht schon anfangen, hier in Europa...`,
                 mediaType: 'Tagebucheintrag',
                 tags: ['Tagebuch', 'Lea', 'Bildung'],
+            },
+            {
+                id: 12,
+                title: "Menschenrechte Video",
+                author: "Kaya, Paula",
+                category: 'video',
+                icon: '🎬',
+                shortDesc: "Ein informatives Video zu Menschenrechten",
+                fullDesc: "Kaya und Paula präsentieren ein kreatives Video-Projekt, das wichtige Aspekte der Menschenrechte auf ansprechende Weise präsentiert.",
+                mediaType: 'YouTube Video',
+                videoId: 'zyGhA3PyFiQ',
+                tags: ['Video', 'Menschenrechte', 'Bildung'],
             }
         ];
 
@@ -852,8 +868,11 @@
                                     <a href="${encodeURI(f)}" download style="background:#667eea;color:#fff;padding:0.5rem 0.75rem;border-radius:6px;text-decoration:none;font-weight:600;">Download</a>
                                     <a href="${encodeURI(f)}" target="_blank" style="color:#6b7280; font-size:0.95rem;">Im neuen Tab öffnen</a>
                                 </div>
-                                <div style="height:420px; border:2px solid #e5e7eb; border-radius:8px; overflow:hidden;">
-                                    <iframe src="${encodeURI(f)}" style="width:100%; height:100%; border:0;" title="PDF ${i+1}"></iframe>
+                                <div style="border:2px solid #e5e7eb; border-radius:8px; overflow:hidden; ${f.toLowerCase().endsWith('.jpg') || f.toLowerCase().endsWith('.jpeg') || f.toLowerCase().endsWith('.png') ? '' : 'height:420px;'}">
+                                    ${f.toLowerCase().endsWith('.jpg') || f.toLowerCase().endsWith('.jpeg') || f.toLowerCase().endsWith('.png') ? 
+                                        `<img src="${encodeURI(f)}" style="width:100%; height:auto; display:block;" alt="Bild ${i+1}">` :
+                                        `<iframe src="${encodeURI(f)}" style="width:100%; height:100%; border:0;" title="PDF ${i+1}"></iframe>`
+                                    }
                                 </div>
                             </div>
                         `).join('')}
